@@ -79,24 +79,15 @@ const MainPage = () => {
   console.log(validated);
   const onValidate = () => {
     if (inputName.length < 1 && inputName === "") {
-      alert("Please enter a valid name!");
-      setValidated(false);
+      alert("Please enter a valid name");
     }
     if (inputContact < 1 && inputContact === "") {
       alert("Please enter a valid contact number");
-      setValidated(false);
     }
     if (!rp.test(inputEmail)) {
       alert("Please enter a valid email address");
-      setValidated(false);
-    }
-    if (
-      inputName.length > 1 &&
-      inputContact.length > 1 &&
-      rp.test(inputEmail)
-    ) {
+    } else {
       setValidated(true);
-      onSave();
     }
   };
 
@@ -108,16 +99,22 @@ const MainPage = () => {
             <div style={styles.headerWrapper}>
               <h1 style={styles.headerText}>
                 <i class="far fa-address-book"></i>
-                {"\n"}Welcome to the Phone Book
+                {"\n"}Welcome to your Contact Directory !
               </h1>
             </div>
             <div style={styles.formWrapper}>
               <FormControl>
                 <Input
                   label="Name"
-                  helperText="Name of the person that you just got to know!"
+                  helperText="What's his/her name?"
                   value={inputName}
                   onChange={(e) => setInputName(e.target.value)}
+                />
+                <Input
+                  label="Email"
+                  helperText="E.g. 123@imail.com"
+                  value={inputEmail}
+                  onChange={(e) => setInputEmail(e.target.value)}
                 />
                 <Input
                   label="Contact Number"
@@ -138,25 +135,33 @@ const MainPage = () => {
                   label={<p>WhatsApp Contactable</p>}
                   labelPlacement="end"
                 />
-                <Input
-                  label="Email"
-                  helperText="E.g. 123@imail.com"
-                  value={inputEmail}
-                  onChange={(e) => setInputEmail(e.target.value)}
-                />
+
                 <Route>
                   <div style={styles.buttonWrapper}>
-                    <Button
-                      to={validated ? "/contact" : "/"}
-                      component={Link}
-                      onClick={() => onValidate()}
-                      variant="outlined"
-                      color="default"
-                      size="large"
-                      startIcon={<SaveIcon />}
-                    >
-                      Save
-                    </Button>
+                    {!validated ? (
+                      <Button
+                        onClick={() => onValidate()}
+                        variant="outlined"
+                        color="default"
+                        size="large"
+                      >
+                        Validate
+                      </Button>
+                    ) : (
+                      <Button
+                        to={"/contact"}
+                        component={Link}
+                        onClick={() => {
+                          onSave();
+                        }}
+                        variant="outlined"
+                        color="default"
+                        size="large"
+                        startIcon={<SaveIcon />}
+                      >
+                        Save
+                      </Button>
+                    )}
                   </div>
                 </Route>
               </FormControl>
