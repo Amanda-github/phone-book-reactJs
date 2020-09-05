@@ -1,0 +1,12 @@
+.App {
+  flex: 1;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  background-color: mistyrose;
+  font-family: "Grandstander", sans-serif;
+}
